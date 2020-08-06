@@ -1,23 +1,29 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import styled, {ThemeProvider} from "styled-components";
+import {NameContext} from "./NameContext";
 import axios from 'axios';
 
 const Title = styled.h1`
 font-size: 1.5em;
 text-aligned: center;
-color: lightseagreen;
+color: indianred;
 `;
 
 const Wrapper = styled.section`
   padding: 1em;
-  background-color: mistyrose
+  background-color: lightcyan
+`;
+
+const Name = styled.section`
+  padding: 1em;
+  background-color: lightcyan
 `;
 
 const Img = styled.img`
   height:70%;
   margin: 10px;
   border-radius: 10px;
-  border: 3px solid mistyrose; 
+  border: 3px solid lightcyan; 
   &:hover {
     border: 3px solid black; 
   }; 
@@ -32,7 +38,7 @@ position: center;
   color: black;
   font-size: 1em;
   padding: 0.30em 1em;
-  border: 2px solid palevioletred;
+  border: 2px solid lightcyan;
   border-radius: 10px;
 
 
@@ -42,12 +48,13 @@ position: center;
 //(props) => props.inputColor
 
 
+
 class API extends React.Component {
     state = {
         name: "yeet",
         sprite: "wheat",
         type: [],
-        favorites: ["abc","adf","jjk"]
+        favorites: []
     }
 
 GetTypeColor = (props) => {
@@ -159,11 +166,7 @@ postHandle = () => {
     }
     
   }
-
-  checkDuplicates(x) {
-    if(x == this.state.name){
-    }
-  }
+  
 
 
 //max num of pokemon is 807
@@ -185,12 +188,15 @@ GetRandomPokemon = () => {
 }
 
 componentDidMount() {
+    
     this.GetRandomPokemon();
  }
 
 
 render(){
+    
     return(
+        
         <Wrapper>
         <div className="App">
             <Title>Pokemon API</Title>
@@ -208,15 +214,16 @@ render(){
                 })}
             </div>
 
+            <Name>
             <div>{this.state.name}</div>
+            </Name>
+            
             
             <button onClick={() => this.verifyFavorite()}>Add to your Favorites</button>
             
         </div>
         </Wrapper>
     ); 
+}  
 }
-    
-}
-
 export default API;
